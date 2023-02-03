@@ -70,11 +70,11 @@ const WeekLaunchMenu = () => {
     const days = ['월', '화', '수', '목', '금'];
 
     useEffect(() => {
-        // axios.post(`${API.LAUNCH}`).then((res) => {
-        //     setMenus(res.data[1]);
-        //     setLoading(true);
-        // });
-        setMenus(['밥 김치 라면','밥 김치 라면','밥 김치 라면','밥 김치 라면','밥 김치 라면'])
+        axios.post(`${API.LAUNCH}`).then((res) => {
+            setMenus(res.data[1]);
+            setLoading(true);
+        });
+        // setMenus(['밥 김치 라면','밥 김치 라면','밥 김치 라면','밥 김치 라면','밥 김치 라면']);
         setLoading(true);
         setDay(new Date().getDay());
     }, []);
