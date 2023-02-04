@@ -70,15 +70,13 @@ const WeekLaunchMenu = () => {
     const days = ['월', '화', '수', '목', '금'];
 
     useEffect(() => {
-        axios.post(`${API.LAUNCH}`).then((res) => {
-            setMenus(res.data[1]);
-            setLoading(true);
-        });
-        // setMenus(['밥 김치 라면','밥 김치 라면','밥 김치 라면','밥 김치 라면','밥 김치 라면']);
-        setLoading(true);
+        // axios.post(`${API.LAUNCH}`).then((res) => {
+        //     setMenus(res.data[1]);
+        // });
+        setMenus(['밥 김치 안드로메다멸치볶음','밥 김치 라면','밥 김치 라면','밥 김치 라면','밥 김치 라면']);
         setDay(new Date().getDay());
+        setLoading(true);
     }, []);
-
     return (
         <>
         {loading ?
@@ -88,7 +86,7 @@ const WeekLaunchMenu = () => {
                     {days.map((val, idx) => (
                         <DayDiv key={idx}>
                             <Day id={idx} fontColor={ idx+1===day ? '#2878FF' : '#888888' } borderColor={ idx+1===day ? '#2878FF' : '#CCCCCC' }>{val}</Day>
-                            <Menu fontColor={ idx+1===day ? '#2878FF' : '#252525' } borderColor={ idx+1===day ? '#2878FF' : '#CCCCCC' }><TestDiv>{menus[idx].split(' ').map((val) => <p key={val}>{val}</p>)}</TestDiv></Menu>
+                            <Menu fontColor={ idx+1===day ? '#2878FF' : '#252525' } borderColor={ idx+1===day ? '#2878FF' : '#CCCCCC' }><TestDiv>{menus[idx].split(' ').map((val) => <p key={val}>{val.length >= 8 ? val.substring(0,6)+'...' : val}</p>)}</TestDiv></Menu>
                         </DayDiv>
                     ))}
             </WeekLaunchChart>
