@@ -61,8 +61,6 @@ const TestDiv = styled.div`
 //     transform: translate(0, -50%);
 // `;
 
-//8글자이상이면 6글자까지만 나오고 + ...
-
 const WeekLaunchMenu = () => {
     const [day, setDay] = useState(0);
     const [loading, setLoading] = useState(false);

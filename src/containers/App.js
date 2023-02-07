@@ -8,7 +8,7 @@ import Header from '../header';
 import WeekLaunchMenu from '../weeklaunch';
 // import MainAd from '../ad';
 // import Main from '../main';
-// import Test from '../test';
+import Test from '../test';
 
 const StyledHeader = styled.div`
   box-shadow: 0 0 0 1px blue inset;
@@ -106,7 +106,7 @@ const App = () => {
           <Notice />
         </Content2>
       </Section>
-      {/* <Test /> */}
+      <Test />
     </>
   );
 }

@@ -21,6 +21,8 @@ const LoginBtn = styled.button`
   width: 250px;
   height: 60px;
   border-radius: 20px 0px 0px 0px;
+  color : ${(props) => props.fontColor};
+  font-size: 18px;
 `;
 
 const JoinBtn = styled.button`
@@ -29,6 +31,8 @@ const JoinBtn = styled.button`
   width: 250px;
   height: 60px;
   border-radius: 0px 20px 0px 0px;
+  color : ${(props) => props.fontColor};
+  font-size: 18px;
 `;
 
 const ImgDiv = styled.div`
@@ -42,28 +46,47 @@ const LoginInputDiv = styled.div`
   margin-bottom: 40px;
 `;
 
+const JoinInputDiv = styled.div`
+  width: 500px;
+  height: 260px;
+  margin-bottom:40px;
+`;
+
 const Login = () => {
   const [loginBtnColor, setLoginBtnColor] = useState('white');
   const [joinBtnColor, setJoinBtnColor] = useState('gray');
+  const [isLoginPage, setIsLoginPage] = useState(1);
+  const [btnLoginFontColor, setBtnLoginFontColor] = useState('#2878FF');
+  const [btnJoinFontColor, setBtnJoinFontColor] = useState('#252525');
+
 
   const changeLogin = () => {
     setLoginBtnColor('white');
-    setJoinBtnColor('gray');
+    setJoinBtnColor('#888888');
+    setBtnLoginFontColor('#2878FF');
+    setBtnJoinFontColor('#252525');
+    setIsLoginPage(1);
   };
 
   const changeJoin = () => {
     setJoinBtnColor('white');
-    setLoginBtnColor('gray');
+    setLoginBtnColor('#888888');
+    setBtnLoginFontColor('#252525');
+    setBtnJoinFontColor('#2878FF');
+    setIsLoginPage(0);
   };
 
   return (
     <LoginDiv onClick={(e) => e.stopPropagation()}>
-      <LoginBtn bgColor={loginBtnColor} onClick={changeLogin}>로그인</LoginBtn>
-      <JoinBtn bgColor={joinBtnColor} onClick={changeJoin}>회원가입</JoinBtn>
+      <LoginBtn fontColor={btnLoginFontColor} bgColor={loginBtnColor} onClick={changeLogin}>로그인</LoginBtn>
+      <JoinBtn fontColor={btnJoinFontColor} bgColor={joinBtnColor} onClick={changeJoin}>회원가입</JoinBtn>
       <ImgDiv />
-      <LoginInputDiv>
+      {isLoginPage ? 
+        <LoginInputDiv>
         <Form />
-      </LoginInputDiv>
+        </LoginInputDiv> :
+        <JoinInputDiv>123</JoinInputDiv>
+      }
     </LoginDiv>
   );
 }

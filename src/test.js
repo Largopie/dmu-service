@@ -1,65 +1,37 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ToDoListItem from './ToDoListItem';
 
 const Test = () => {
-  const [testObj, setObj] = useState({});
-  const [join, setJoin] = useState({
-    grade: '',
-    name: '',
-    password: '',
-    studentId: '',
-    phone: '',
-    email: '',
-    department: '',
-    division: '',
-  });
+  const [val, setVal] = useState('');
+  const [items, setItems] = useState([]);
 
-  const handleOnChangeState = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setJoin({
-      ...join,
-      [e.target.name]: e.target.value,
-    });
+    setItems([{
+      value: {val},
+    }, ...items])
+    setVal('');
   };
 
-  const handleOnClick = () => {
-    axios.post('http://192.168.0.57:8080/meal').then((res) => {
-      console.log(res);
-      setObj(res.data);
-    });
+  console.log(items);
+
+  const handleSetValue = (e) => {
+    setVal(e.target.value);
   };
 
   return (
     <div>
+      <h1>TodoList 구현해보기</h1><br />
       <form>
-        Grade :
-        <input type="text" name="grade" value={join.grade} onChange={handleOnChangeState} />
-        <br />
-        Name :
-        <input type="text" name="name" value={join.name} onChange={handleOnChangeState} />
-        <br />
-        Password :
-        <input type="text" name="password" value={join.password} onChange={handleOnChangeState} />
-        <br />
-        Student ID :
-        <input type="text" name="studentId" value={join.studentId} onChange={handleOnChangeState} />
-        <br />
-        Phone :
-        <input type="text" name="phone" value={join.phone} onChange={handleOnChangeState} />
-        <br />
-        Email :
-        <input type="text" name="email" value={join.email} onChange={handleOnChangeState} />
-        <br />
-        Department :
-        <input type="text" name="department" value={join.department} onChange={handleOnChangeState} />
-        <br />
-        Division :
-        <input type="text" name="division" value={join.division} onChange={handleOnChangeState} />
-        <br />
-        <input type="button" value="올리기" onClick={handleOnClick} />
+        <input onChange={handleSetValue} value={val} type="text"/>
+        <input onClick={handleSubmit} type="submit" value="등록"/>
       </form>
-      { JSON.stringify(testObj[1]) }
-
+      <ul>
+        {items.map((item, idx) => (
+          <ToDoListItem key={idx} idx={idx} todo={item.value} />
+        ))}
+      </ul>
     </div>
   );
 }
