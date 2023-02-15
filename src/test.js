@@ -1,28 +1,32 @@
-import React, { useState } from 'react';
-// import axios from 'axios';
-import ToDoList from './ToDoList';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API } from './config';
+import styled from 'styled-components';
+
+const Div = styled.div`
+  border: solid 1px blue;
+`;
 
 const Test = () => {
-  const [val, setVal] = useState('');
-  const [toDoList, setToDoList] = useState([]);
+  const [value, setValue] = useState([]);
 
-  const handleOnChange = (e) => {
-    setVal(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setToDoList([val, ...toDoList])
-    setVal('');
-  };
-  return (
-    <div>
-      <h1>TodoList 구현해보기</h1><br />
-      <form>
-        <input onChange={handleOnChange} value={val} type="text" placeholder='Enter what to do' />
-        <input onClick={handleSubmit} type="submit" value="Add" />
-      </form>
-      <ToDoList todolist={toDoList}/>
+  let codes = "<h1> hi </h1>";
+  useEffect(() => {
+    axios.post(`${API.NOTICE}`, {
+      less: 10,
+      greater: 1,
+    }).then((res) => {
+      setValue(res.data);
+      console.log(res.data);
+    });
+  }, []);
+    return (
+    <div dangerouslySetInnerHTML={ {__html: value.map((content) =>"<div style='border: 1px solid blue'>"+ content.noticeContent + "</div>")} }>
+      {/* {JSON.stringify(value.noticeContent)} */}
+      {/* <ul>
+        {value.map((content) => <li key={content.noticeNumber}>{content.noticeContent}</li>)}
+      </ul> */}
+      
     </div>
   );
 }
